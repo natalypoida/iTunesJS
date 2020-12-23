@@ -11,4 +11,18 @@ max-width: 100px;
 .video-fullscreen {
     cursor: pointer;
 }
+.radio-footer {
+    display: flex;
+    justify-content: space-around;   
+}
+.radio-volume-controller {
+    display: inline-flex;
+}
+.radio-icon {
+    margin-top: 15px;
+}
+input.radio-volume {
+    max-width: 200px;
+    }
+ 
 /*# sourceMappingURL=style.min.css.map */
