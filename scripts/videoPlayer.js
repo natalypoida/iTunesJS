@@ -5,7 +5,12 @@ export const videoPlayerInit = () => {
   const videoTimePassed = document.querySelector(".video-time__passed");
   const videoProgress = document.querySelector(".video-progress");
   const videoTimeTotal = document.querySelector(".video-time__total");
- 
+  const videoVolume = document.querySelector(".video-volume");
+  const videoFullScreen = document.querySelector(".video-fullscreen");
+
+  videoFullScreen.addEventListener("click", () => {
+      videoPlayer.requestFullscreen();
+  });
   //Change play and pause icons
   const toggleIcon = () => {
     if (videoPlayer.paused) {
@@ -16,7 +21,8 @@ export const videoPlayerInit = () => {
       videoButtonPlay.classList.remove("fa-play");
     }
   };
-  //Change play and pause 
+
+  //Change play and pause by click
   const togglepLay = () => {
     if (videoPlayer.paused) {
       videoPlayer.play();
@@ -28,9 +34,12 @@ export const videoPlayerInit = () => {
     videoPlayer.pause();
     videoPlayer.currentTime = 0;
   };
-  
-  const addZero = (n) => (n < 10 ? "0" + n : n);
 
+  const addZero = (n) => (n < 10 ? "0" + n : n);
+  const changeValue = () => {
+    const valueVolume = videoVolume.value;
+    videoPlayer.volume = valueVolume / 100;
+  };
   videoPlayer.addEventListener("click", togglepLay);
   videoButtonPlay.addEventListener("click", togglepLay);
 
@@ -64,4 +73,12 @@ export const videoPlayerInit = () => {
 
     videoPlayer.currentTime = (value * duration) / 100;
   });
+
+  videoVolume.addEventListener("input", changeValue);
+  videoPlayer.addEventListener('volumechange', () => {
+      videoVolume.value = Math.round(videoPlayer.volume * 100);
+      
+  })
+
+  changeValue();
 };
