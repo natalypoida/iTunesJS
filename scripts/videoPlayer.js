@@ -1,3 +1,4 @@
+import { addZero } from './supScript.js';
 export const videoPlayerInit = () => {
   const videoPlayer = document.querySelector(".video-player");
   const videoButtonPlay = document.querySelector(".video-button__play");
@@ -11,6 +12,15 @@ export const videoPlayerInit = () => {
   videoFullScreen.addEventListener("click", () => {
       videoPlayer.requestFullscreen();
   });
+
+  //check full screen mode and add/remove controlls
+  videoPlayer.addEventListener('fullscreenchange', () => {
+    if(document.fullscreen) {
+      videoPlayer.controls = true;
+    } else {
+      videoPlayer.controls = false;
+    }
+  })
   //Change play and pause icons
   const toggleIcon = () => {
     if (videoPlayer.paused) {
@@ -35,7 +45,7 @@ export const videoPlayerInit = () => {
     videoPlayer.currentTime = 0;
   };
 
-  const addZero = (n) => (n < 10 ? "0" + n : n);
+  
   const changeValue = () => {
     const valueVolume = videoVolume.value;
     videoPlayer.volume = valueVolume / 100;
